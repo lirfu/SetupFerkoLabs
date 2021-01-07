@@ -39,7 +39,7 @@ class Logger:
 		if not quiet:
 			print(s)
 		if not self.err:
-			self.err = open(self.path, 'w')
+			self.err = open(self.path, 'w', encoding='utf8')
 		self.err.write(s + '\n')
 
 	def close(self):
@@ -114,12 +114,12 @@ if __name__ == '__main__':
 
 	# Collect student information.
 	studenti = {}
-	with open(args['students']) as f:  # List of all students (svi studenti iz CSV popisa bodova predmeta).
+	with open(args['students'], encoding='utf8') as f:  # List of all students (svi studenti iz CSV popisa bodova predmeta).
 		for l in f:
 			parts = re.split(';', l.strip())
 			studenti[parts[0]] = parts[0] + '\t' + parts[2][1:-1] + '\t' + parts[1][1:-1] + '\t' + parts[3][1:-1]
 
-	with open(args['listfile'], 'r') as f:
+	with open(args['listfile'], 'r', encoding='utf8') as f:  # List of all terms in the file from the scheduler.
 		for l in f:
 			parts = re.split('\|', l.strip())
 			folname = parts[2][5:10] + '_' + parts[3][0:2] + '-' + parts[3][3:5]
